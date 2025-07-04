@@ -2,7 +2,7 @@
 #include <vector>
 using namespace std;
 
-void insertion_sort(int a[], int n) {
+void insertion_sort(int a[], const int n) {
     for (int i = 1; i < n; i++) {
         const int current = a[i];
         int prev = i - 1;
@@ -15,7 +15,7 @@ void insertion_sort(int a[], int n) {
     }
 }
 
-void selection_sort(int a[], int n) {
+void selection_sort(int a[], const int n) {
     for (int i = 0; i < n - 1; i++) {
         int min_pos = i;
 
@@ -33,7 +33,7 @@ void selection_sort(int a[], int n) {
     }
 }
 
-void counter_sort(int a[], int n) {
+void counter_sort(int a[], const int n) {
     //find the max
     int max = INT_MIN;
     for (int i = 0; i < n; i++) {
@@ -59,7 +59,7 @@ void counter_sort(int a[], int n) {
 
 int main() {
     int arr[] = {10, 9, 8, 7, 6, 5, 4, 3, 1, 2, 1};
-    int n = sizeof(arr) / sizeof(int);
+    constexpr int n = sizeof(arr) / sizeof(int);
 
     insertion_sort(arr, n);
 
