@@ -1,0 +1,7 @@
+# ninja log v6
+2	384	7677215462880912	CMakeFiles/dsa.dir/main.cpp.obj	9dd0d1cf3d687f26
+386	505	7677215466711855	dsa.exe	86b8f7fe0fce6fc9
+15	545	7677779882946420	CMakeFiles/dsa.dir/arrays/sub_arrays.cpp.obj	cde70e4fd257bfe7
+2	521	7677699953791715	CMakeFiles/dsa.dir/Sub_Arrays.cpp.obj	682bef67b56ab9db
+11	469	7677791045465020	CMakeFiles/dsa.dir/arrays/pair_sum.cpp.obj	5098c50fd9681e7b
+10	343	7677792125242002	CMakeFiles/dsa.dir/arrays/sub_arrays.cpp.obj	cde70e4fd257bfe7

@@ -1,0 +1,13 @@
+{
+  "OutputFoldersPerTargetSystem": {
+    "Local Machine": [
+      "out\\build\\Configure preset using toolchain file",
+      "out\\install\\Configure preset using toolchain file"
+    ]
+  },
+  "ExpandedNodes": [
+    "",
+    "\\arrays"
+  ],
+  "PreviewInSolutionExplorer": false
+}
