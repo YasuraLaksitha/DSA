@@ -34,37 +34,37 @@ void selection_sort(int a[], int n) {
 }
 
 void counter_sort(int a[], int n) {
-    int max = -1;
+    //find the max
+    int max = INT_MIN;
     for (int i = 0; i < n; i++) {
-        if (max < a[i]) {
+        if (max < a[i])
             max = a[i];
-        }
     }
 
-    vector freq(max + 1, 0);
+    //create 2nd array with the length of max value
+    vector freq(max, 0);
 
-    for (int i = 0; i < n; i++) {
+    //update the index of the current value in the new array
+    for (int i = 0; i < n; i++)
         freq[a[i]]++;
-    }
 
-    int j = 0;
-    for (int i = 0; i < freq.size(); i++) {
-        while (freq[i] > 0) {
-            a[j] = i;
-            freq[i]--;
-            j++;
-        }
+    //replace the original array with the 2nd array indexes
+    int idx = 0;
+    for (int i = 0; i <= max; i++) {
+        while (freq[i]-- > 0)
+            a[idx++] = i;
     }
 }
 
+
 int main() {
-    int arr[] = {10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
+    int arr[] = {10, 9, 8, 7, 6, 5, 4, 3, 1, 2, 1};
     int n = sizeof(arr) / sizeof(int);
 
     insertion_sort(arr, n);
 
     cout << "insertion_sort" << endl;
-    for (auto x: arr) {
+    for (const auto x: arr) {
         cout << x << ",";
     }
     cout << endl;
@@ -72,7 +72,7 @@ int main() {
     selection_sort(arr, n);
 
     cout << "selection_sort" << endl;
-    for (auto x: arr) {
+    for (const auto x: arr) {
         cout << x << ",";
     }
     cout << endl;
@@ -80,7 +80,7 @@ int main() {
     counter_sort(arr, n);
 
     cout << "counter_sort" << endl;
-    for (auto x: arr) {
+    for (const auto x: arr) {
         cout << x << ",";
     }
 }

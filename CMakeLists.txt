@@ -10,5 +10,5 @@ add_executable(
         arrays/pair_sum.h
         arrays/k_rotate.cpp
         arrays/k_rotate.h
-        interview/LRUChache.cpp
+        other/LRUCache.cpp
 )
