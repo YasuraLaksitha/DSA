@@ -50,8 +50,8 @@ bool check_premutation(string str1, string str2)
 
 int main()
 {
-    string str1 = "abc";
-    string str2 = "bac";
+    const string str1 = "abc";
+    const string str2 = "bac";
 
     cout << str2 << " is " << (check_premutation(str1, str2) ? "a " : "not a ") << "pre mutation of " << str1;
     return 0;
