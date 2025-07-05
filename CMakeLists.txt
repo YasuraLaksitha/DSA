@@ -11,4 +11,5 @@ add_executable(
         arrays/k_rotate.cpp
         arrays/k_rotate.h
         other/LRUCache.cpp
+        strings/RunLengthEncoding.cpp
 )
