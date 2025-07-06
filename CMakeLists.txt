@@ -13,4 +13,5 @@ add_executable(
         other/LRUCache.cpp
         strings/RunLengthEncoding.cpp
         2d_arrays/SpiralPrint.cpp
+        2d_arrays/StaircaseSearch.cpp
 )
