@@ -14,4 +14,5 @@ add_executable(
         strings/RunLengthEncoding.cpp
         2d_arrays/SpiralPrint.cpp
         2d_arrays/StaircaseSearch.cpp
+        vector/Vector.cpp
 )
