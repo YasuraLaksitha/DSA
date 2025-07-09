@@ -9,16 +9,18 @@
 //          if current_size == 0 ->  return -1(no element);
 
 #include <iostream>
+#include <optional>
 using namespace std;
 
+template<typename T>
 class Vector {
-    int *arr;
+    T *arr;
     int current_size;
     int maximum_size;
 
-    void double_the_array(int * &arr) {
+    void double_the_array(T * &arr) {
         maximum_size = maximum_size * 2;
-        const auto new_arr = new int[maximum_size];
+        const auto new_arr = new T[maximum_size];
 
         for (int i = 0; i < maximum_size; i++) {
             new_arr[i] = arr[i];
@@ -32,21 +34,21 @@ public:
     Vector() {
         current_size = 0;
         maximum_size = 1;
-        arr = new int[maximum_size];
+        arr = new T[maximum_size];
     }
 
-    void push_back(const int element) {
+    void push_back(const T element) {
         if (maximum_size == current_size) {
             double_the_array(arr);
         }
         arr[current_size++] = element;
     }
 
-    int pop_back() {
+    optional<T> pop_back() {
         if (current_size > 0) {
             return arr[--current_size];
         }
-        return -1;
+        return nullopt;
     }
 
     void print_array() const {
@@ -59,12 +61,14 @@ public:
         return current_size == 0;
     }
 
-    [[nodiscard]] int front() const {
-        return is_empty() ? -1 : arr[0];
+    [[nodiscard]] optional<int> front() const {
+        if (is_empty())return nullopt;
+        return arr[0];
     }
 
-    [[nodiscard]] int back() const {
-        return is_empty() ? -1 : arr[current_size - 1];
+    [[nodiscard]] optional<int> back() const {
+        if (is_empty())return nullopt;
+        return arr[current_size - 1];
     }
 
     [[nodiscard]] int capacity() const {
@@ -75,17 +79,19 @@ public:
         return current_size;
     }
 
-    [[nodiscard]] int at(const int index) const {
-        return is_empty() ? -1 : index > current_size - 1 ? -1 : arr[index];
+    [[nodiscard]] optional<int> at(const int index) const {
+        if (is_empty() || index > current_size - 1)return nullopt;
+        return arr[index];
     }
 
-    [[nodiscard]] int operator[](const int index) const {
-        return is_empty() ? -1 : index > current_size - 1 ? -1 : arr[index];
+    [[nodiscard]] optional<int> operator[](const int index) const {
+        if (is_empty() || index > current_size - 1)return nullopt;
+        return arr[index];
     }
 };
 
 int main() {
-    Vector v;
+    Vector<int> v;
 
     cout << "Initial State:\n";
     cout << "Capacity: " << v.capacity() << "\n";
@@ -101,8 +107,18 @@ int main() {
     v.push_back(50);
 
     cout << "After push_back():\n";
-    cout << "Front Element: " << v.front() << "\n";
-    cout << "Back Element: " << v.back() << "\n";
+    if (const auto front = v.front()) {
+        cout << "Front Element: " << *front << "\n";
+    } else {
+        cout << "Front Element: None\n";
+    }
+
+    if (const auto back = v.back()) {
+        cout << "Back Element: " << *back << "\n";
+    } else {
+        cout << "Back Element: None\n";
+    }
+
     cout << "Capacity: " << v.capacity() << "\n";
     cout << "Size: " << v.size() << "\n";
     cout << "Array Contents: ";
@@ -110,18 +126,36 @@ int main() {
     cout << "\n------------------------------------\n";
 
     cout << "Accessing Elements:\n";
-    cout << "at(2): " << v.at(2) << "\n";
-    cout << "operator : " << v[2] << "\n";
-    cout << "at(10) [out of bounds]: " << v.at(10) << "\n";
+
+    if (const auto val = v.at(2)) {
+        cout << "at(2): " << *val << "\n";
+    } else {
+        cout << "at(2): Invalid index\n";
+    }
+
+    if (const auto val = v[2]) {
+        cout << "operator[2]: " << *val << "\n";
+    } else {
+        cout << "operator[2]: Invalid index\n";
+    }
+
+    if (const auto val = v.at(10)) {
+        cout << "at(10) [out of bounds]: " << *val << "\n";
+    } else {
+        cout << "at(10) [out of bounds]: Invalid index\n";
+    }
+
     cout << "------------------------------------\n";
 
     cout << "Popping Elements:\n";
-    cout << "Pop: " << v.pop_back() << "\n";
-    cout << "Pop: " << v.pop_back() << "\n";
-    cout << "Pop: " << v.pop_back() << "\n";
-    cout << "Pop: " << v.pop_back() << "\n";
-    cout << "Pop: " << v.pop_back() << "\n";
-    cout << "Pop (should return -1): " << v.pop_back() << "\n";
+    for (int i = 0; i < 6; i++) {
+        if (auto val = v.pop_back()) {
+            cout << "Pop: " << *val << "\n";
+        } else {
+            cout << "Pop: Vector is empty\n";
+        }
+    }
+
     cout << "------------------------------------\n";
 
     cout << "Final State:\n";
